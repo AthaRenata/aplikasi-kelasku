@@ -11,7 +11,7 @@ class School extends Model
 
     protected $guarded = ['id'];
 
-    public function users(){
+    public function students(){
         return $this->hasMany(User::class);
     }
 }

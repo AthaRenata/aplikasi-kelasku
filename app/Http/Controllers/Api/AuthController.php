@@ -26,16 +26,22 @@ class AuthController extends ApiController
         $credentials = $request->only('phone','password');
 
         if (Auth::attempt($credentials)) {
-            if ($secretApiKey==config('services.api_secret_key')) {
-                $token = JwtToken::setData([
-                    'id' => Auth::user()->id,
-                    'school_id' => Auth::user()->school_id,
-                ])
-                ->build();
-                return $this->sendSuccess($token);
+            if (Auth::user()->role===2) {
+                if ($secretApiKey==config('services.api_secret_key')) {
+                    $token = JwtToken::setData([
+                        'id' => Auth::user()->id,
+                        'school_id' => Auth::user()->school_id,
+                    ])
+                    ->build();
+                    return $this->sendSuccess($token);
+                }else{
+                    return $this->sendBadRequest("API key tidak valid");
+                }
+
             }else{
-                return $this->sendBadRequest("API key tidak valid");
+                return $this->sendBadRequest("Anda tidak memiliki hak akses untuk login");
             }
+
         }else{
             return $this->sendBadRequest("Login gagal");
         }
@@ -56,10 +62,11 @@ class AuthController extends ApiController
         }
 
         User::create([
-            'phone'=>preg_replace('/[^0-9]/', '', $request->phone),
-            'password'=>Hash::make($request->password),
+            'role'=>2,
             'name'=>$request->name,
-            'school_id'=>$request->school_id,
+            'password'=>Hash::make($request->password),
+            'phone'=>preg_replace('/[^0-9]/', '', $request->phone),
+            'school_id'=>$request->school_id
         ]);
 
         return $this->sendMessage("Berhasil registrasi");

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Storage;
@@ -63,7 +62,7 @@ class UserController extends ApiController
                 ->update([
                     'name'=>$request->name,
                     'school_id'=>$request->school_id,
-                    'photo'=>$photo,
+                    'photo'=>$photo
                 ]);
         }
 

@@ -15,6 +15,7 @@ class FriendController extends ApiController
     {
         $data = User::select('id','photo','name','school_id')
         ->where('id', '!=', $request->userCredential['id'])
+        ->where('role', '!=', 1)
         ->get();
 
         return $this->sendSuccess($data);
@@ -25,7 +26,10 @@ class FriendController extends ApiController
      */
     public function show(string $id)
     {
-        $data = User::select('photo','name','phone','school_id')->find($id);
+        $data = User::select('photo','name','phone','school_id')
+        ->find($id)
+        ->where('role', '!=', 1)
+        ->first();
         return $this->sendSuccess($data);
     }
     

@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $with = ['school']; 
+    protected $with = ['school'];
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +19,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'phone',
-        'password',
+        'role',
         'name',
+        'password',
+        'email',
+        'phone',
         'school_id',
         'photo'
     ];
@@ -49,7 +51,42 @@ class User extends Authenticatable
         ];
     }
 
+    public static function boot()
+    {
+        parent::boot();
+        
+        static::saving(function ($user) {
+            if ($user->role_id === 2 && (empty($user->phone) || empty($user->school_id))) {
+                return false;
+            }
+
+            if ($user->role_id === 2) {
+                $validator = Validator::make($user->toArray(), [
+                    'phone' => 'unique:users,phone,NULL,id,role,2',
+                ]);
+
+                if ($validator->fails()) {
+                    return false;
+                }
+            }
+
+            if ($user->role_id === 1 && empty($user->email)) {
+                return false;
+            }
+            
+            if ($user->role_id === 1) {
+                $validator = Validator::make($user->toArray(), [
+                    'email' => 'unique:users,email,NULL,id,role,1',
+                ]);
+
+                if ($validator->fails()) {
+                    return false;
+                }
+            }
+        });
+    }
+
     public function school(){
-        return $this->belongsTo(School::class)->select(['id','npsn','name as school_name']);
+        return $this->belongsTo(School::class)->select('id','npsn','name');
     }
 }

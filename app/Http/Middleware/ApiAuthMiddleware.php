@@ -40,7 +40,7 @@ class ApiAuthMiddleware
             if($e instanceof ExpiredException){
                return $this->sendUnauthorized('Your token was expired');
             }
-            return $this->sendUnauthorized('Your token was invalid : '.$token);
+            return $this->sendUnauthorized('Your token was invalid');
         }
         return $next($request);
     }
