@@ -17,6 +17,6 @@ Route::middleware('api-auth')->group(function () {
     Route::apiResource('/friends',FriendController::class)->only(['index','show']);
     Route::get('/profile',[UserController::class,'index']);
     Route::get('/edit-profile',[UserController::class,'showProfile']);
-    Route::post('/edit-profile',[UserController::class,'updateProfile']);
+    Route::put('/edit-profile',[UserController::class,'updateProfile']);
     Route::patch('/edit-password',[UserController::class,'updatePassword']);
 });
