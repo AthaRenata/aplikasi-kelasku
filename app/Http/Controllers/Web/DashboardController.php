@@ -23,7 +23,7 @@ class DashboardController extends Controller
         return view('admin.dashboard.index',[
             'admins' => $this->serviceUser->getAllAdmins()->total(),
             'students' => $this->serviceUser->getAllStudents()->total(),
-            'schools' => $this->serviceSchool->getAll()->total()
+            'schools' => $this->serviceSchool->getAllPaginate()->total()
         ]);
     }
 }
