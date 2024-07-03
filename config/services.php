@@ -31,6 +31,11 @@ return [
         ],
     ],
 
+    'firebase' => [
+        'fcm_key' => env('FIREBASE_FCM_KEY'),
+    ],
+
     'api_secret_key' => env('API_SECRET_KEY')
+
 
 ];
