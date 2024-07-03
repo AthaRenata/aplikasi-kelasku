@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "266a3b8e-2aa4-4b85-b144-a2c28ff7f1d9",
+		"name": "Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27088810"
+	},
+	"item": [
+		{
+			"name": "Get Schools",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/schools"
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Contoh Nama",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "08123456789",
+							"type": "text"
+						},
+						{
+							"key": "school_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{baseUrl}}/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "frk2U1rQMizm5klGxgIZDq3pBT87mb27U8NXp3dqOJg5TiwdN7tiIARVqlSHK66qWlRI8NWrx7GBGFCU1KesYDBl8J",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone",
+							"value": "08123456789",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{baseUrl}}/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Friendlist Page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjAwOTQ5NTAsImlzcyI6IktlbGFza3UiLCJpYXQiOjE3MjAwMDg1NTAsIm5iZiI6MTcyMDAwODU1MCwianRpIjoiQnd5bFdMeTVhc2JzUUhQIiwiZGF0YSI6eyJpZCI6MTgsInNjaG9vbF9pZCI6MX19.C-sl7U5qD8sBHE4zcfZdt-CXMKNKvTtubmPiyH45ABQ",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/friends"
+			},
+			"response": []
+		},
+		{
+			"name": "Friend Detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjAwOTQ5NTAsImlzcyI6IktlbGFza3UiLCJpYXQiOjE3MjAwMDg1NTAsIm5iZiI6MTcyMDAwODU1MCwianRpIjoiQnd5bFdMeTVhc2JzUUhQIiwiZGF0YSI6eyJpZCI6MTgsInNjaG9vbF9pZCI6MX19.C-sl7U5qD8sBHE4zcfZdt-CXMKNKvTtubmPiyH45ABQ"
+					}
+				],
+				"url": "{{baseUrl}}/friends/15"
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjAwOTQ5NTAsImlzcyI6IktlbGFza3UiLCJpYXQiOjE3MjAwMDg1NTAsIm5iZiI6MTcyMDAwODU1MCwianRpIjoiQnd5bFdMeTVhc2JzUUhQIiwiZGF0YSI6eyJpZCI6MTgsInNjaG9vbF9pZCI6MX19.C-sl7U5qD8sBHE4zcfZdt-CXMKNKvTtubmPiyH45ABQ"
+					}
+				],
+				"url": "{{baseUrl}}/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Edit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjAwOTQ5NTAsImlzcyI6IktlbGFza3UiLCJpYXQiOjE3MjAwMDg1NTAsIm5iZiI6MTcyMDAwODU1MCwianRpIjoiQnd5bFdMeTVhc2JzUUhQIiwiZGF0YSI6eyJpZCI6MTgsInNjaG9vbF9pZCI6MX19.C-sl7U5qD8sBHE4zcfZdt-CXMKNKvTtubmPiyH45ABQ"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Nama Edit",
+							"type": "text"
+						},
+						{
+							"key": "school_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/E:/BACKUP DATA C/DOCUMENTS/backup_xampp/webskolahku/images/galeri/temp.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/edit-profile?_method=PUT",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"edit-profile"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PUT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Password Edit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MjAwOTQ5NTAsImlzcyI6IktlbGFza3UiLCJpYXQiOjE3MjAwMDg1NTAsIm5iZiI6MTcyMDAwODU1MCwianRpIjoiQnd5bFdMeTVhc2JzUUhQIiwiZGF0YSI6eyJpZCI6MTgsInNjaG9vbF9pZCI6MX19.C-sl7U5qD8sBHE4zcfZdt-CXMKNKvTtubmPiyH45ABQ"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "old_password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "new_password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "new_password_confirmation",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/edit-password?_method=PATCH",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"edit-password"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PATCH"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{baseUrl}}/logout"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:8000/api"
+		}
+	]
+}
