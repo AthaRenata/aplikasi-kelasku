@@ -1,104 +1,59 @@
-<?php 
+<?php
+
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Http;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Message;
+use Kreait\Firebase\Messaging\Notification;
 
-class FCM{
-    protected static $firebaseUrl = "https://fcm.googleapis.com/fcm/send";
-    protected static $firebaseKey;
-    protected static $regIds = [];
-    protected static $platform;
+class FCM {
+    // protected static $firebaseUrl = "https://fcm.googleapis.com/v1/projects/project1-5df9d/messages:send";
+    // protected static $firebaseKey;
 
-    public function __construct()
-    {
-        self::$firebaseKey  =  config('services.firebase.fcm_key');
-    }
+    // public function __construct() {
+    //     self::$firebaseKey = config('services.firebase.oauth_key');
+    // }
 
-    public static function ios($regIds = [])
-    {
-        self::$platform = "ios";
-        self::$regIds = $regIds;
-        return new static();
-    }
+    // public static function to($deviceToken) {
+    //     return [
+    //         'message' => [
+    //             'token' => $deviceToken
+    //         ]
+    //     ];
+    // }
 
-    public static function android($regIds = [])
-    {
-        self::$platform = "android";
-        self::$regIds = $regIds;
-        return new static();
-    }
+    // public static function notification($title, $body) {
+    //     return [
+    //         'notification' => [
+    //             'title' => $title,
+    //             'body' => $body
+    //         ]
+    //     ];
+    // }
 
-    /**
-     * Usage example
-     * 
-     * FCM::ios(['',''])->send([
-     *      'title' => 'Halo selamat pagi!',
-     *      'message' => 'Jangan lupa untuk mengerjakan tugas hari ini'
-     * ]);
-     * FCM::android(['',''])->send([
-     *      'title' => 'Halo selamat pagi!',
-     *      'message' => 'Jangan lupa untuk mengerjakan tugas hari ini'
-     * ]);
-     * 
-     */
+    // public static function send($data) {
+    //     $firebaseKey = self::$firebaseKey;
+    //     $firebaseUrl = self::$firebaseUrl;
 
-    /**
-     * dispatch function to send fcm notification as queue
-     */
-    public static function dispatch($data)
-    {
-        $regIds = self::$regIds;
-        $platform = self::$platform;
-        $firebaseKey = self::$firebaseKey;
-        $firebaseUrl = self::$firebaseUrl;
-        Bus::chain([
-            function () use ($data, $regIds, $platform, $firebaseKey, $firebaseUrl) {
-                self::sendFirebaseNotification(
-                    $data,
-                    $regIds,
-                    $platform,
-                    $firebaseKey,
-                    $firebaseUrl
-                );
-            },
-        ])->dispatch();
-    }
-    public static function send($data)
-    {
-        self::sendFirebaseNotification(
-            data: $data,
-            regIds: self::$regIds,
-            platform: self::$platform,
-            firebaseKey: self::$firebaseKey,
-            firebaseUrl: self::$firebaseUrl
-        );
-    }
+    //     $response = Http::withHeaders([
+    //         'Authorization' => 'Bearer ' . $firebaseKey,
+    //         'Content-Type' => 'application/json',
+    //     ])->post($firebaseUrl, $data);
 
-    public static function sendFirebaseNotification($data, $regIds, $platform, $firebaseKey, $firebaseUrl)
-    {
-        if (count($regIds)) {
-            $regIds = array_values(array_unique($regIds));
+    //     return $response->json();
+    // }
 
-            $postData = [
-                'registration_ids' => $regIds,
-                'data' => $data,
-                'content_available' => true,
-                'priority' => 'high',
-            ];
+    public static function sendFCMNotification($deviceToken, $title, $body)
+{
+    $messaging = app('firebase.messaging');
 
-            if ($platform == "ios") {
-                $postData['notification'] = [
-                    'sound' => 'default',
-                    'title' => trim(strip_tags($data['title'])),
-                    'body' => trim(strip_tags($data['message'])),
-                ];
-            }
-            $response = Http::withHeaders([
-                'Authorization' => "key=" . $firebaseKey
-            ])->post($firebaseUrl, $postData);
-            return  $response->body();
-        }
-    }
+    $message = CloudMessage::new()
+        ->withNotification(Notification::create($title, $body))
+        ->withTarget('token', $deviceToken);
+
+    $messaging->send($message);
 }
+}
+
 ?>
