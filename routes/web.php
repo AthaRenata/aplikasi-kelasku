@@ -10,7 +10,7 @@ Route::controller(LoginController::class)
 ->group(function () {
     Route::get("/","index")->name('login')->middleware('guest');
     Route::post("/","authenticate")->name('authenticate');
-    Route::post("/logout","logout")->name('login');
+    Route::post("/logout","logout")->name('logout');
 });
 
 Route::middleware('auth')->group(function () {
