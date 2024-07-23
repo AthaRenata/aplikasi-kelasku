@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\School;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        User::create([
+            'role' => 1,
+            'name' => 'administrator',
+            'password' => Hash::make('password'),
+            'email' => 'admin@gmail.com',
+        ]);
 
         School::create([
             'npsn' => '20328969',
