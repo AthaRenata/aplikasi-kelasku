@@ -25,7 +25,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
 
                 if (Auth::user()->role===1) {
-                    return redirect()->intended('/dashboard');
+                    return redirect()->intended(route('dashboard'));
                 }else{
                     return back()->with('loginError','Anda tidak memiliki hak akses untuk login');
                 }
@@ -42,6 +42,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(route('login'));
     }
 }

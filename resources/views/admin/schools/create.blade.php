@@ -1,12 +1,12 @@
 <x-layout>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom text-body-secondary">
         <h1 class="h2">
-            <a href="/schools" class="text-body-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Sekolah" ><i class="bi-buildings-fill fs-1"></i></a>
+            <a href="{{route('schools.index')}}" class="text-body-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Sekolah" ><i class="bi-buildings-fill fs-1"></i></a>
         <i class="bi-caret-right-fill fs-1"></i> Form Tambah Sekolah</h1>
         </div>
 
         <div class="mt-2 p-3 text-body-secondary">
-            <form action="/schools" method="POST">
+            <form action="{{route('schools.store')}}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="npsn" class="form-label">NPSN</label>

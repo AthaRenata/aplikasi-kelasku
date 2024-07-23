@@ -4,7 +4,7 @@
         </div>
 
 <div class="d-flex justify-content-end mb-3">
-        <a href="/schools/create" class="btn btn-primary text-decoration-none"><i class="bi-plus-circle px-1"></i> Tambah Sekolah</button></a>
+        <a href="{{route('schools.create')}}" class="btn btn-primary text-decoration-none"><i class="bi-plus-circle px-1"></i> Tambah Sekolah</button></a>
     </div>
 
     @if (session()->has('success'))
@@ -33,8 +33,8 @@
                             <td>{{$school->npsn}}</td>
                             <td>{{$school->name}}</td>
                             <td>
-                                <a href="/schools/{{$school->id}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
-                                <form action="/schools/{{$school->id}}" method="POST" class="d-inline">
+                                <a href="{{route('schools.edit',$school->id)}}" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
+                                <form action="{{route('schools.destroy',$school->id)}}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>

@@ -1,5 +1,5 @@
 <header class="z-0 w-100 navbar justify-content-between sticky-top bg-theme1 flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white" href="/dashboard">Aplikasi Kelasku</a>
+<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white" href="{{route('dashboard')}}">Aplikasi Kelasku</a>
 <p class="navbar-nav d-none d-lg-block text-white fs-6 px-3">Selamat Datang, {{Auth::user()->name}}</p>
 <ul class="navbar-nav flex-row d-md-none">
   {{-- <li class="nav-item text-nowrap">
@@ -30,19 +30,19 @@
       <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
         <ul class="ps-4 navbar-nav flex-column">
           <li class="nav-item">
-            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('dashboard*')) ? 'activelink' : '' }}" href="/dashboard">
+            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('dashboard*')) ? 'activelink' : '' }}" href="{{route('dashboard')}}">
               <i class="bi-speedometer2"></i>
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('schools*')) ? 'activelink' : '' }}" href="/schools">
+            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('schools*')) ? 'activelink' : '' }}" href="{{route('schools.index')}}">
               <i class="bi-buildings-fill"></i>
               Sekolah
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('users*')) ? 'activelink' : '' }}" href="/users">
+            <a class="nav-link fs-6 d-flex align-items-center gap-2 linkwborder {{ (request()->is('users*')) ? 'activelink' : '' }}" href="{{route('users.index')}}">
               <i class="bi-people-fill"></i>
               Pengguna
             </a>
@@ -60,7 +60,7 @@
           <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2 linkwborder" href="#">
               <i class="bi-door-closed"></i>
-              <form action="/logout" method="POST">
+              <form action="{{route('logout')}}" method="POST">
                 @csrf
             <button class="btn text-danger" onclick="return confirm('Yakin akan keluar dari aplikasi?')">Sign out</button>
             </form>

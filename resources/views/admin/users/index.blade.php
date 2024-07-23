@@ -4,7 +4,7 @@
         </div>
 
         <div class="d-flex justify-content-end mb-3">
-            <a href="/users/create" class="btn btn-primary text-decoration-none"><i class="bi-plus-circle px-1"></i> Tambah Pengguna</button></a>
+            <a href="{{route('users.create')}}" class="btn btn-primary text-decoration-none"><i class="bi-plus-circle px-1"></i> Tambah Pengguna</button></a>
         </div>
 
         @if (session()->has('success'))
@@ -46,8 +46,8 @@
                                 <td>{{$admin->name}}</td>
                                 <td>{{$admin->email}}</td>
                                 <td>
-                                    <a href="/users/{{$admin->id}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
-                                    <form action="/users/{{$admin->id}}" method="POST" class="d-inline">
+                                    <a href="{{route('users.edit',$admin->id)}}" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
+                                    <form action="{{route('users.destroy',$admin->id)}}" method="POST" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>
@@ -85,8 +85,8 @@
                                 <td>{{$student->phone}}</td>
                                 <td>{{$student->school->name}}</td>
                                 <td>
-                                    <a href="/users/{{$student->id}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
-                                    <form action="/users/{{$student->id}}" method="POST" class="d-inline">
+                                    <a href="{{route('users.edit',$student->id)}}" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
+                                    <form action="{{route('users.destroy',$student->id)}}" method="POST" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>
